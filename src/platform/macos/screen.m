@@ -52,8 +52,10 @@ void osx_screen_get_dimensions(struct screen *scr, int *w, int *h)
 	*h = scr->h;
 }
 
-void macos_init_screen()
+void macos_refresh_screen()
 {
+	nr_screens = 0;
+
 	for (NSScreen *screen in NSScreen.screens) {
 		struct screen *scr = &screens[nr_screens++];
 
@@ -64,4 +66,19 @@ void macos_init_screen()
 
 		scr->overlay = create_overlay_window(scr->x, scr->y, scr->w, scr->h);
 	}
+}
+
+void macos_init_screen()
+{
+	macos_refresh_screen();
+
+	// Register for screen change notifications.
+	[[NSNotificationCenter defaultCenter]
+	    addObserverForName:
+		NSApplicationDidChangeScreenParametersNotification
+			object:nil
+			 queue:nil
+		    usingBlock:^(NSNotification *notification) {
+			    macos_refresh_screen();
+		    }];
 }
