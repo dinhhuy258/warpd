@@ -23,6 +23,7 @@ static struct {
 
 	{ "hint_oneshot_key", "A-M-l", "Activate hint mode and exit upon selection.", OPT_KEY },
 	{ "hint2_oneshot_key", "A-M-L", "Activate two pass hint mode and exit upon selection.", OPT_KEY },
+	{ "screen_oneshot_key", "A-M-S", "Activate screen selection mode and exit upon selection.", OPT_KEY },
 
 	/* Normal mode keys */
 
