@@ -44,8 +44,6 @@ void screen_selection_mode()
 			int w, h;
 			platform->screen_get_dimensions(screens[i], &w, &h);
 			platform->mouse_move(screens[i], w/2, h/2);
-			// Temporary workaround to select the screen.
-			platform->mouse_click(1);
 		}
 	}
 
